@@ -1,0 +1,77 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "on-tertiary": "#ffffff",
+        "on-tertiary-fixed": "#231a0e",
+        "surface-container": "#efeeea",
+        "on-secondary-fixed-variant": "#444846",
+        "tertiary": "#2f2518",
+        "on-tertiary-container": "#b4a592",
+        "outline-variant": "#c2c8c4",
+        "surface-container-high": "#e9e8e4",
+        "inverse-surface": "#2f312e",
+        "primary-fixed": "#d3e7dd",
+        "on-primary": "#ffffff",
+        "secondary-fixed-dim": "#c4c7c5",
+        "surface-container-lowest": "#ffffff",
+        "secondary-fixed": "#e0e3e0",
+        "primary-container": "#2e4039",
+        "inverse-on-surface": "#f2f1ed",
+        "inverse-primary": "#b7cbc1",
+        "surface": "#faf9f5",
+        "tertiary-container": "#463b2d",
+        "secondary-container": "#dde0de",
+        "on-surface-variant": "#424845",
+        "surface-container-highest": "#e3e2df",
+        "on-error": "#ffffff",
+        "primary": "#182a24",
+        "on-secondary-container": "#5f6361",
+        "tertiary-fixed": "#f1e0cc",
+        "surface-dim": "#dbdad6",
+        "tertiary-fixed-dim": "#d5c4b1",
+        "on-surface": "#1b1c1a",
+        "surface-bright": "#faf9f5",
+        "background": "#faf9f5",
+        "on-secondary": "#ffffff",
+        "on-primary-container": "#97aba2",
+        "on-primary-fixed-variant": "#384b43",
+        "on-background": "#1b1c1a",
+        "surface-variant": "#e3e2df",
+        "error-container": "#ffdad6",
+        "outline": "#737875",
+        "on-primary-fixed": "#0d1f19",
+        "surface-tint": "#50625b",
+        "primary-fixed-dim": "#b7cbc1",
+        "secondary": "#5b5f5d",
+        "on-secondary-fixed": "#181c1b",
+        "on-error-container": "#93000a",
+        "surface-container-low": "#f4f4f0",
+        "on-tertiary-fixed-variant": "#504536",
+        "error": "#ba1a1a"
+      },
+      fontFamily: {
+        "headline": ["Clash Grotesk", "sans-serif"],
+        "subheading": ["Cabinet Grotesk", "sans-serif"],
+        "body": ["Sora", "sans-serif"],
+        "label": ["Cabinet Grotesk", "sans-serif"]
+      },
+      borderRadius: {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries')
+  ],
+}
