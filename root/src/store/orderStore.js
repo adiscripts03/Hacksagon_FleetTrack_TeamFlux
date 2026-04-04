@@ -14,6 +14,10 @@ function normalizeOrder(order) {
   };
 }
 
+function encodeOrderId(id) {
+  return encodeURIComponent(String(id || ''));
+}
+
 export const useOrderStore = create((set, get) => ({
   data: [],
   error: null,
@@ -41,14 +45,14 @@ export const useOrderStore = create((set, get) => ({
     return created;
   },
   updateStatus: async (id, status) => {
-    const updated = normalizeOrder(await apiPatch(`/orders/${id}/status`, { status }));
+    const updated = normalizeOrder(await apiPatch(`/orders/${encodeOrderId(id)}/status`, { status }));
     set((state) => ({
       data: state.data.map((order) => (order.id === id ? updated : order)),
     }));
     return updated;
   },
   assignDriver: async (id, driver) => {
-    const updated = normalizeOrder(await apiPatch(`/orders/${id}/assign-driver`, { driver }));
+    const updated = normalizeOrder(await apiPatch(`/orders/${encodeOrderId(id)}/assign-driver`, { driver }));
     set((state) => ({
       data: state.data.map((order) => (order.id === id ? updated : order)),
     }));
@@ -87,7 +91,7 @@ export const useOrderStore = create((set, get) => ({
     });
   },
   delete: async (id) => {
-    await apiDelete(`/orders/${id}`);
+    await apiDelete(`/orders/${encodeOrderId(id)}`);
     set((state) => ({ data: state.data.filter((order) => order.id !== id) }));
   },
 }));
