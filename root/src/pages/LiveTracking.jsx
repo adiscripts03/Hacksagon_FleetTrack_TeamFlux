@@ -24,14 +24,6 @@ const REGION_LABELS = [
   { name: 'Kolkata', position: [22.5726, 88.3639] },
 ];
 
-const CORRIDOR_CHIPS = [
-  { label: 'North', detail: 'Delhi → Jaipur' },
-  { label: 'West', detail: 'Mumbai → Pune' },
-  { label: 'South', detail: 'Bengaluru → Chennai' },
-  { label: 'Central', detail: 'Hyderabad → Nagpur' },
-  { label: 'East', detail: 'Kolkata → Bhubaneswar' },
-];
-
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 function getFleetColor(tone) {
@@ -268,16 +260,6 @@ function FleetMap({ isLightTheme, selectedFleetId, onSelectFleet, fleetStates })
         </Button>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center px-6">
-        <div className="pointer-events-auto z-[500] flex flex-wrap justify-center gap-2 rounded-full border border-[var(--map-border)] bg-[var(--map-surface-overlay)] px-4 py-3 shadow-[var(--shadow-soft)] backdrop-blur">
-          {CORRIDOR_CHIPS.map((c) => (
-            <div key={c.label} className="rounded-full border border-[var(--map-border)] bg-[var(--map-chip-bg)] px-3 py-1.5 text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">{c.label}</p>
-              <p className="mt-1 text-xs text-[var(--map-text-muted)]">{c.detail}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
