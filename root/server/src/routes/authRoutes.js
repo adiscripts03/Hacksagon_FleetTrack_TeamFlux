@@ -24,6 +24,7 @@ import { createEntityId, normalizeEmail, normalizeTenantSlug } from '../utils/id
 
 const router = express.Router();
 const PASSWORD_RESET_SUCCESS_MESSAGE = 'If the account exists, a password reset OTP has been sent.';
+const OTP_EMAIL_SEND_TIMEOUT_MS = 8000;
 
 function generateNumericOtp(length = 6) {
   const safeLength = Math.min(Math.max(length, 4), 8);
@@ -31,6 +32,20 @@ function generateNumericOtp(length = 6) {
   const max = 10 ** safeLength;
 
   return String(crypto.randomInt(min, max));
+}
+
+async function sendPasswordResetOtpEmailSafely({ email, otp }) {
+  const sendPromise = sendPasswordResetOtpEmail({ email, otp }).catch((error) => {
+    console.error('Password reset OTP email delivery failed:', error);
+  });
+
+  // Keep API responses fast even when SMTP is slow or intermittently unavailable.
+  await Promise.race([
+    sendPromise,
+    new Promise((resolve) => {
+      setTimeout(resolve, OTP_EMAIL_SEND_TIMEOUT_MS);
+    }),
+  ]);
 }
 
 router.post(
@@ -222,7 +237,7 @@ router.post(
             requestedUserAgent: req.get('user-agent') || '',
           });
 
-          await sendPasswordResetOtpEmail({ email: user.email, otp });
+          await sendPasswordResetOtpEmailSafely({ email: user.email, otp });
         }
       }
     }
